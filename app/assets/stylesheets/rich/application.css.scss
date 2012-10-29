@@ -6,6 +6,7 @@
  *= require_tree ./mixins
 */
 
+@import "compass";
 
 // main vars
 $activeText: #3bbfce;
@@ -64,6 +65,16 @@ $fontSizeLarge: 16px;
 }
 
 #legacy-form {
+	@include border-radius;
+	background: rgba(230, 230, 230, .5);
+	bottom: 10px;
+	display: block;
+	padding: 10px;
+	position: absolute;
+	right: 10px;
+}
+
+#uploadBlock {
 	display: none;
 }
 

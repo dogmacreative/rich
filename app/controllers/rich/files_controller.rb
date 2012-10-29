@@ -23,7 +23,7 @@ module Rich
       end
       
       # stub for new file
-      @rich_asset = RichFile.new
+      @rich_asset = RichFile.new :simplified_type => @type
       
       respond_to do |format|
         format.js
@@ -46,20 +46,15 @@ module Rich
     end
     
     def create
-      @file = RichFile.new(:simplified_type => params[:simplified_type]) #make sure the type is set
-      
+      @file = RichFile.new(params[:rich_file]) #make sure the type is set
+
       if(params[:scoped] == 'true')
         @file.owner_type = params[:scope_type]
         @file.owner_id = params[:scope_id].to_i
       end
       
-      # use the file from Rack Raw Upload
-      if(params[:file])
-        @file.rich_file = params[:file]
-      end
-      
       if @file.save
-        render :json => { :success => true, :rich_id => @file.id }
+        redirect_to :back
       else
         render :json => { :success => false, 
                           :error => "Could not upload your file:\n- "+@file.errors.to_a[-1].to_s,

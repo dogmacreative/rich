@@ -5,7 +5,7 @@ require 'kaminari'
 module Rich
   class RichFile < ActiveRecord::Base
 
-    attr_accessible :rich_file_file_name, :rich_file_content_type, :rich_file_file_size, :rich_file_updated_at, :owner_type, :owner_id, :uri_cache, :simplified_type
+    attr_accessible :rich_file_file_name, :rich_file_content_type, :rich_file_file_size, :rich_file_updated_at, :owner_type, :owner_id, :uri_cache, :simplified_type, :rich_file
 
     scope :images, where("rich_rich_files.simplified_type = 'image'")
     scope :files, where("rich_rich_files.simplified_type = 'file'")
@@ -17,10 +17,10 @@ module Rich
                       :convert_options => Proc.new { |a| Rich.convert_options[a] }
     
     validates_attachment_presence :rich_file
-    validate :check_content_type
+    # validate :check_content_type
     validates_attachment_size :rich_file, :less_than=>15.megabyte, :message => "must be smaller than 15MB"
     
-    before_create :clean_file_name
+    # before_create :clean_file_name
 
     after_create :cache_style_uris_and_save
     before_update :cache_style_uris
@@ -56,7 +56,7 @@ module Rich
       self.uri_cache = uris.to_json
     end
     
-    def clean_file_name      
+    def clean_file_name
       extension = File.extname(rich_file_file_name).gsub(/^\.+/, '')
       filename = rich_file_file_name.gsub(/\.#{extension}$/, '')
       
