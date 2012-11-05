@@ -26,7 +26,7 @@ module Rich
       @rich_asset = RichFile.new :simplified_type => @type
       
       respond_to do |format|
-        format.js
+        # format.js # IE 8 for some reason advtises window.open as an AJAZ request or so Rich thinks.
         format.html
       end
       
