@@ -23,7 +23,7 @@ rich.AssetPicker.prototype = {
 		}
 		params.dom_id = dom_id;
 		var url = addQueryString(options.richBrowserUrl, params );
-		console.log(url);
+		// console.log(url);
 		window.open(url, 'filebrowser', "width=860,height=500")
   },
 
