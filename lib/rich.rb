@@ -74,7 +74,8 @@ module Rich
     :toolbar => [['Format','Styles'],['Bold', 'Italic', '-','NumberedList', 'BulletedList', 'Blockquote', '-', 'richImage', 'richFile','MediaEmbed', '-', 'Link', 'Unlink'],['Source', 'ShowBlocks']],
     :language => I18n.default_locale,
     :richBrowserUrl => '/rich/files/',
-    :uiColor => '#f4f4f4'
+    :uiColor => '#f4f4f4',
+    :skin => Object.const_defined?("ActiveAdmin") ? 'moono_aa' : 'moono'
   }
   # End configuration defaults
   
