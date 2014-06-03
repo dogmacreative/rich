@@ -12,7 +12,7 @@ module Rich
 
         validates_attachment_presence :rich_file
         validate :check_content_type
-        # validates_attachment_size :rich_file, :less_than=>15.megabyte, :message => "must be smaller than 15MB"
+        validates_attachment_size :rich_file, :less_than=>100.megabyte, :message => "must be smaller than 100MB"
 
         after_create :cache_style_uris_and_save
         before_update :cache_style_uris
