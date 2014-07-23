@@ -15,6 +15,10 @@ module Rich
     has_attached_file :rich_file,
                       :styles => Proc.new {|a| a.instance.set_styles },
                       :convert_options => Proc.new { |a| Rich.convert_options[a] }
+
+    if self.respond_to?(:do_not_validate_attachment_file_type)
+      do_not_validate_attachment_file_type :rich_file
+    end
     
     validates_attachment_presence :rich_file
     validate :check_content_type
